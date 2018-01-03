@@ -95,7 +95,7 @@ namespace csi {
     void async_metadata_client::handle_connect_retry_timer(const boost::system::error_code& ec) {
       if(!ec) {
         BOOST_LOG_TRIVIAL(trace) << "async_metadata_client::handle_connect_retry_timer()";
-        _current_retry_timeout + boost::posix_time::seconds(1);
+        _current_retry_timeout += boost::posix_time::seconds(1);
         if(_current_retry_timeout > _max_retry_timeout)
           _current_retry_timeout = _max_retry_timeout;
         _connect_async_next();

@@ -62,7 +62,7 @@ void consumer_coordinator::connect_async(const std::vector<broker_address>& brok
         _client.get_group_coordinator_async(_consumer_group, [this, timeout, cb](rpc_result<group_coordinator_response> result) {
           if (result) // no matter the error - let's fake the error code
           {
-            BOOST_LOG_TRIVIAL(error) << _consumer_group << ", consumer_coordinator, get_group_coordinator failed: " << to_string((csi::kafka::error_codes) result->error_code);
+            BOOST_LOG_TRIVIAL(error) << _consumer_group << ", consumer_coordinator, get_group_coordinator failed" /* << to_string((csi::kafka::error_codes) result->error_code)*/;
             cb(make_error_code(boost::system::errc::host_unreachable));
             return;
           }
